@@ -15,7 +15,7 @@ var production = {
     appAddress: '127.0.0.1',
     appPort: 4747,
     socketHost: '8.8.8.8',
-    binDir: '/kb/deployment',
+    binDir: '/kb/deployment/bin',
     dataDir: IRIS_DATA,
     env: global.process.env.NODE_ENV || 'development'
 };
