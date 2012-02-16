@@ -75,6 +75,7 @@ am__depfiles_maybe = depfiles
 COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
 	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
 CCLD = $(CC)
+LINK = $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) $(LDFLAGS) -o $@
 SOURCES = fbsql.c fbsql_tab.c gwas2go.c join_once.c ranges.c scatter.c \
 	scatter_ez.c scatter_new.c
 DIST_SOURCES = fbsql.c fbsql_tab.c gwas2go.c join_once.c ranges.c \
@@ -117,9 +118,9 @@ INSTALL_DATA = @INSTALL_DATA@
 INSTALL_PROGRAM = @INSTALL_PROGRAM@
 INSTALL_SCRIPT = @INSTALL_SCRIPT@
 INSTALL_STRIP_PROGRAM = @INSTALL_STRIP_PROGRAM@
-LDFLAGS = -Lfastbit/src/.libs -lfastbit -lm -Wl,-rpath,$(libdir)
+LDFLAGS = -Lfastbit/src/.libs -Wl,-rpath,$(libdir)
 LIBOBJS = @LIBOBJS@
-LIBS = @LIBS@
+LIBS = -lfastbit -lm
 LTLIBOBJS = @LTLIBOBJS@
 MAKEINFO = @MAKEINFO@
 MKDIR_P = @MKDIR_P@
@@ -180,7 +181,6 @@ top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 SUBDIRS = fastbit
 SUFFIXES = .cpp
-LINK = $(CCLD) $(AM_CFLAGS) $@.o $(CFLAGS)$(AM_LDFLAGS) $(LDFLAGS) -o $@ 
 all: all-recursive
 
 .SUFFIXES:
