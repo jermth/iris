@@ -4,3 +4,4 @@ SUFFIXES = .cpp
 CC = g++
 CPPFLAGS = -Ifastbit/src
 LDFLAGS  = -Lfastbit/src/.libs -lfastbit -lm -Wl,-rpath,$(libdir)
+LINK = $(CCLD) $(AM_CFLAGS) $@.o $(CFLAGS)$(AM_LDFLAGS) $(LDFLAGS) -o $@ 

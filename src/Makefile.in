@@ -75,7 +75,6 @@ am__depfiles_maybe = depfiles
 COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
 	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
 CCLD = $(CC)
-LINK = $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) $(LDFLAGS) -o $@
 SOURCES = fbsql.c fbsql_tab.c gwas2go.c join_once.c ranges.c scatter.c \
 	scatter_ez.c scatter_new.c
 DIST_SOURCES = fbsql.c fbsql_tab.c gwas2go.c join_once.c ranges.c \
@@ -181,6 +180,7 @@ top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 SUBDIRS = fastbit
 SUFFIXES = .cpp
+LINK = $(CCLD) $(AM_CFLAGS) $@.o $(CFLAGS)$(AM_LDFLAGS) $(LDFLAGS) -o $@ 
 all: all-recursive
 
 .SUFFIXES:
