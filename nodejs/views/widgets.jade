@@ -5,5 +5,11 @@ block scripts
     script(type="text/javascript", src="/js/iris.js")
     script(type="text/javascript", src="/js/d3.js")
     script(type="text/javascript", src="/js/widgets/widget.js")
+    script(type="text/javascript", src="/js/manager.js")
+    script(type="text/javascript", src="/js/jquery.histogram.js")
+    script(type="text/javascript")
+        var manager = new Manager;
+        manager.register('sidebar', $("sidebar"));
+        $(document).ready(render_widget("cvx"))
 
 !=partial('partials/widget')

@@ -56,7 +56,8 @@ var widgets = {
     pcoords:    'pcoords.js',
     chord:       'chord.js',
 	data: 'data.js',
-	barChart: 'barChart.js'
+	barChart: 'barChart.js',
+    go_histogram: 'go_histogram.js',
 };
 
 // Routes

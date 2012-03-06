@@ -15,7 +15,7 @@ Manager.prototype.register = function(id, obj) {
 
 Manager.prototype.notify = function(id, data) {
     for (widget in this.widgets) {
-        if (widget != id) {
+        if (widget == id) {
             var obj = this.widgets[widget];
             if ( obj.src ) {
                 $("#"+widget).load( obj.src + '&where=[' + data + ']');
