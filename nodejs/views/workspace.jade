@@ -2,7 +2,7 @@ link(rel="stylesheet", href="/css/widgets.css")
 
 block scripts
 	style
-		ul.workspace { list-style-type: none; margin: 0; padding: 0; margin-bottom: 10px }
+		ul#widgets { list-style-type: none; margin: 0; padding: 0; margin-bottom: 10px; width: 300px; }
 
 	script(type="text/javascript", src="/js/jquery.js")
 	script(type="text/javascript", src="/js/jquery-ui.js")
@@ -16,17 +16,17 @@ block scripts
 		var widgets = {};
 		function addWidgetDiv() {
 			var newDivId = "workspace" + widgetCounter++;
-			$("#container").append(
-				'<li><div id="' + newDivId +
-				'" style="position:relative;min-width:500px"></div></li>'
+			$("#widgets").append(
+				'<li class="well"><div id="' + newDivId +
+				'" style="position:relative"></div></li>'
 			);
-			$("#" + newDivId).draggable({containment: "#container", scroll:false});
+			$("#" + newDivId).parent().draggable({containment: "#container", scroll:false});
 			return newDivId;
 		}
 		function renderWidget(elem, widgetId) {
 			if ($(elem).hasClass('active')) {
 				var widgetDiv = widgets[widgetId];
-				$("#" + widgetDiv).remove();
+				$("#" + widgetDiv).parent().remove();
 				$(elem).removeClass('active');
 			} else {
 				var divId = addWidgetDiv();
@@ -39,11 +39,25 @@ block scripts
 		
 	script
 		$(function() {
+			var widgetSizeButton = null;
+			$("#widgetSize").children('a').click(function(e) {
+				var button = $(e.target);
+				if (widgetSizeButton == null || button.attr('value') != widgetSizeButton.attr('value')) {
+					if (widgetSizeButton != null) {
+						widgetSizeButton.removeClass('active');
+					}
+					widgetSizeButton = button;
+					button.addClass('active');
+					$("ul#widgets").width(button.attr('value'));
+				}
+			})
+			$("#widgetSize").children('[value="100%"]').click();
 		});
 
-.span8
+.span12
 	h3 Workspace
-	ul(id="container", class="workspace")
+.span8(id="container")
+	ul(id="widgets")
 .span4
 	div(class="well", style="padding:8px 0")
 		ul(class="nav nav-list")
@@ -51,3 +65,9 @@ block scripts
 			- each w in list
 				li
 					a(href="#", onclick="renderWidget(this.parentNode, '#{w.id}')") #{w.name}
+			li(class="nav-header") Settings
+			div
+				small Widget Size
+				.btn-group(id="widgetSize")
+					a.btn(value="300") Small
+					a.btn(value="100%") Large
